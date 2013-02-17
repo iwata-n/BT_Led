@@ -1,15 +1,13 @@
-/*
- Example sketch for the RFCOMM/SPP Bluetooth library - developed by Kristian Lauszus
- For more information visit my blog: http://blog.tkjelectronics.dk/ or 
- send me an e-mail:  kristianl@tkjelectronics.com
+/**
+ * @brief Bluetoothで指示を受けたらLEDをつける
  */
 
 #include <SPP.h>
+
 USB Usb;
-BTD Btd(&Usb); // You have to create the Bluetooth Dongle instance like so
-/* You can create the instance of the class in two ways */
-SPP SerialBT(&Btd); // This will set the name to the defaults: "Arduino" and the pin to "1234"
-//SPP SerialBT(&Btd, "Lauszus's Arduino","0000"); // You can also set the name and pin like so
+BTD Btd(&Usb);
+
+SPP SerialBT(&Btd, "gabu phone", "0000");
 
 boolean firstMessage = true;
 
@@ -21,6 +19,7 @@ void setup() {
   }
   Serial.print(F("\r\nSPP Bluetooth Library Started"));
 }
+
 void loop() {
   Usb.Task();
   if(SerialBT.connected) {
